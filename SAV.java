@@ -1,8 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe principal do programa de visualização e ordenação.
+ * @author Nivea Lins
+ */
 public class SAV {
+
     public static void main(String[] args) {
+        // Valida os argumentos da linha de comando
         if (!ArgumentValidator.validateArguments(args)) {
             System.out.println("Argumentos inválidos.");
             return;
@@ -16,18 +22,18 @@ public class SAV {
         String values = args[4].split("=")[1];
         int pauseTime = Integer.parseInt(args[5].split("=")[1]);
 
+        // Gera a lista a ser ordenada
         List<Comparable> list = ListGenerator.generateList(listType, inputType, values);
         List<Comparable> originalList = new ArrayList<>(list); // Armazena a lista original
 
-
-        // Sorting process
+        // Realiza a ordenação
         Sorter sorter = getSorter(algorithm);
         boolean ascending = order.equalsIgnoreCase("az");
         long startTime = System.currentTimeMillis();
         sorter.sort(list, ascending, pauseTime);
         long endTime = System.currentTimeMillis();
 
-        // Print results
+        // Exibe os resultados
         System.out.println();
         System.out.println("------------------------------------------------------------------");
         System.out.println("Argumentos da CLI: " + String.join(" ", args));
@@ -38,6 +44,12 @@ public class SAV {
         System.out.println("------------------------------------------------------------------");
     }
 
+    /**
+     * Retorna uma instância do algoritmo de ordenação especificado.
+     *
+     * @param algorithm O código do algoritmo de ordenação.
+     * @return Uma instância do algoritmo de ordenação.
+     */
     private static Sorter getSorter(String algorithm) {
         switch (algorithm.toLowerCase()) {
             case "b":
@@ -51,6 +63,12 @@ public class SAV {
         }
     }
 
+    /**
+     * Retorna o nome completo do algoritmo de ordenação.
+     *
+     * @param algorithm O código do algoritmo de ordenação.
+     * @return O nome completo do algoritmo de ordenação.
+     */
     static String getAlgorithmName(String algorithm) {
         switch (algorithm.toLowerCase()) {
             case "b":

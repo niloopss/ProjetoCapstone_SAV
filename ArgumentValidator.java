@@ -1,13 +1,24 @@
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Classe responsável por validar os argumentos de linha de comando.
+ * @author Nivea Lins
+ */
 public class ArgumentValidator {
 
+    // Listas de valores válidos para os diferentes tipos de argumentos
     private static final List<String> ALGORITHMS = Arrays.asList("b", "i", "m");
     private static final List<String> LIST_TYPES = Arrays.asList("n", "c");
     private static final List<String> ORDER_TYPES = Arrays.asList("az", "za");
     private static final List<String> INPUT_TYPES = Arrays.asList("r", "m");
 
+    /**
+     * Valida os argumentos de linha de comando.
+     *
+     * @param args Os argumentos a serem validados.
+     * @return true se os argumentos são válidos, false caso contrário.
+     */
     public static boolean validateArguments(String[] args) {
         if (args.length < 6) {
             System.out.println("Número insuficiente de argumentos.");
@@ -15,6 +26,7 @@ public class ArgumentValidator {
         }
 
         try {
+            // Extrai e valida cada argumento individualmente
             String algorithm = args[0].split("=")[1].toLowerCase();
             String listType = args[1].split("=")[1].toLowerCase();
             String orderType = args[2].split("=")[1].toLowerCase();

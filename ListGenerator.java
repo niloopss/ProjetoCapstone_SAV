@@ -2,12 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Classe responsável por gerar listas de números ou caracteres.
+ */
 public class ListGenerator {
 
+    /**
+     * Gera uma lista de números ou caracteres, baseada nos argumentos fornecidos.
+     *
+     * @param type      O tipo de lista ("n" para números, "c" para caracteres).
+     * @param inputType O tipo de entrada ("m" para manual, "r" para aleatório).
+     * @param values    Os valores a serem usados (número de valores para aleatório ou lista de valores para manual).
+     * @return A lista gerada.
+     */
     public static List<Comparable> generateList(String type, String inputType, String values) {
         List<Comparable> list = new ArrayList<>();
 
-        if (inputType.equalsIgnoreCase("m")) {
+        if (inputType.equalsIgnoreCase("m")) { // Entrada manual
             if (type.equalsIgnoreCase("n")) {
                 for (String value : values.split(",")) {
                     list.add(Integer.parseInt(value.trim()));
@@ -17,7 +28,7 @@ public class ListGenerator {
                     list.add(value.trim().charAt(0));
                 }
             }
-        } else if (inputType.equalsIgnoreCase("r")) {
+        } else if (inputType.equalsIgnoreCase("r")) { // Entrada aleatória
             Random random = new Random();
             int numValues = Integer.parseInt(values);
 
