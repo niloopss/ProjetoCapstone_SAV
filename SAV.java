@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class SAV {
@@ -16,27 +17,50 @@ public class SAV {
         int pauseTime = Integer.parseInt(args[5].split("=")[1]);
 
         List<Comparable> list = ListGenerator.generateList(listType, inputType, values);
-        Sorter sorter;
-        switch (algorithm.toLowerCase()) {
-            case "b":
-                sorter = new BubbleSort();
-                break;
-            case "i":
-                sorter = new InsertionSort();
-                break;
-            case "m":
-                sorter = new MergeSort();
-                break;
-            default:
-                throw new IllegalArgumentException("Algoritmo de ordenação inválido");
-        }
+        List<Comparable> originalList = new ArrayList<>(list); // Armazena a lista original
 
+
+        // Sorting process
+        Sorter sorter = getSorter(algorithm);
         boolean ascending = order.equalsIgnoreCase("az");
         long startTime = System.currentTimeMillis();
         sorter.sort(list, ascending, pauseTime);
         long endTime = System.currentTimeMillis();
 
+        // Print results
+        System.out.println();
+        System.out.println("------------------------------------------------------------------");
+        System.out.println("Argumentos da CLI: " + String.join(" ", args));
+        System.out.println();
+        Display.showSortingDetails(algorithm, listType, order, inputType, originalList);
         System.out.println("Lista ordenada: " + list);
         System.out.println("Tempo gasto: " + (endTime - startTime) + " ms");
+        System.out.println("------------------------------------------------------------------");
+    }
+
+    private static Sorter getSorter(String algorithm) {
+        switch (algorithm.toLowerCase()) {
+            case "b":
+                return new BubbleSort();
+            case "i":
+                return new InsertionSort();
+            case "m":
+                return new MergeSort();
+            default:
+                throw new IllegalArgumentException("Algoritmo de ordenação inválido");
+        }
+    }
+
+    static String getAlgorithmName(String algorithm) {
+        switch (algorithm.toLowerCase()) {
+            case "b":
+                return "Bubble Sort";
+            case "i":
+                return "Insertion Sort";
+            case "m":
+                return "Merge Sort";
+            default:
+                throw new IllegalArgumentException("Algoritmo de ordenação inválido");
+        }
     }
 }

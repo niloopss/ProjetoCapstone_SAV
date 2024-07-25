@@ -21,6 +21,14 @@ public class Display {
         System.out.println();
     }
 
+    public static void showSortingDetails(String algorithm, String listType, String order, String inputType, List<Comparable> list) {
+        System.out.println("Tipo de ordenação: " + SAV.getAlgorithmName(algorithm));
+        System.out.println("Ordem: " + (order.equalsIgnoreCase("az") ? "Crescente" : "Decrescente"));
+        System.out.println("Tipo de Lista: " + (listType.equalsIgnoreCase("n") ? "Números" : "Caracteres"));
+        System.out.println("Tipo de Input: " + (inputType.equalsIgnoreCase("r") ? "Aleatório" : "Manual"));
+        System.out.println("Lista inicial: " + list);
+    }
+
     private static int findMax(List<Comparable> list) {
         int max = 0;
         for (Comparable value : list) {
