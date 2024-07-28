@@ -23,9 +23,9 @@ public class ListGenerator {
                 for (String value : values.split(",")) {
                     list.add(Integer.parseInt(value.trim()));
                 }
-            } else if (type.equalsIgnoreCase("c")) {
+            } else if (type.equalsIgnoreCase("c")) { // Entrada manual
                 for (String value : values.split(",")) {
-                    list.add(value.trim().charAt(0));
+                    list.add((int) value.trim().charAt(0)); // Converte para código ASCII
                 }
             }
         } else if (inputType.equalsIgnoreCase("r")) { // Entrada aleatória

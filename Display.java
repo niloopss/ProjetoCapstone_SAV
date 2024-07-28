@@ -57,12 +57,12 @@ public class Display {
      * @return O maior valor na lista.
      */
     private static int findMax(List<Comparable> list) {
-        int max = 0;
+        Comparable max = list.get(0); // Inicializa com o primeiro elemento da lista
         for (Comparable value : list) {
-            if ((int) value > max) {
-                max = (int) value;
+            if (value.compareTo(max) > 0) {
+                max = value; // Atualiza o máximo com o tipo Comparable
             }
         }
-        return max;
+        return (max instanceof Integer) ? (Integer) max : (int) (Character) max;
     }
 }
