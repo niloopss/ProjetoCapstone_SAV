@@ -13,6 +13,7 @@ public class Display {
      */
     public static void show(List<Comparable> list) {
         boolean containsNumbers = list.stream().anyMatch(item -> item instanceof Integer && !(item instanceof Character));
+        boolean containsChars = list.stream().anyMatch(item -> item instanceof Character);
 
         if (containsNumbers) {
             int max = findMax(list); // Encontra o maior valor na lista
@@ -31,14 +32,16 @@ public class Display {
         }
 
         // Imprime os valores da lista abaixo da representação gráfica
-        for (Comparable value : list) {
-            if (value instanceof Character) {
-                System.out.printf("%-2c ", (char) value);
-            } else {
-                System.out.printf("%-2d ", (int) value);
+        if (!containsChars) {
+            for (Comparable value : list) {
+                if (value instanceof Character) {
+                    System.out.printf("%-2c ", (char) value);
+                } else {
+                    System.out.printf("%-2d ", (int) value);
+                }
             }
+            System.out.println();
         }
-        System.out.println();
     }
 
     /**
@@ -89,7 +92,11 @@ public class Display {
             if (listType.equals("c")) {
                 sb.append((char) ((int) value));
             } else {
-                sb.append(value);
+                if (value instanceof Character) {
+                    sb.append((char) value);
+                } else {
+                    sb.append(value);
+                }
             }
             if (i < list.size() - 1) {
                 sb.append(", ");
