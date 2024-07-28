@@ -210,15 +210,17 @@ import java.util.List;
       int max = findMax(list); // Encontra o maior valor na lista
 
       // Imprime a representação gráfica da lista
-      for (int i = max; i > 0; i--) { // Itera de cima para baixo
+      for (int i = max; i > 0; i--) {
       for (Comparable value : list) {
-      if ((int) value >= i) {
-      System.out.print("⬜ "); // Imprime quadrado se o valor for maior ou igual à linha atual
+      if (value instanceof Integer && (int) value >= i) { // Verifica se é Integer
+      System.out.print("⬜ ");
+      } else if (value instanceof Character) { // Verifica se é Character
+      System.out.print(value + " "); // Exibe o caractere sem quadrado
       } else {
-      System.out.print("   "); // Imprime espaços em branco caso contrário
+      System.out.print("   "); // Espaço em branco para outros tipos (se houver)
       }
       }
-      System.out.println(); // Nova linha após cada iteração
+      System.out.println();
       }
 
       // Imprime os valores da lista abaixo da representação gráfica
@@ -252,13 +254,13 @@ import java.util.List;
     * @return O maior valor na lista.
       */
       private static int findMax(List<Comparable> list) {
-      int max = 0;
+      Comparable max = list.get(0); // Inicializa com o primeiro elemento da lista
       for (Comparable value : list) {
-      if ((int) value > max) {
-      max = (int) value;
+      if (value.compareTo(max) > 0) {
+      max = value; // Atualiza o máximo com o tipo Comparable
       }
       }
-      return max;
+      return (max instanceof Integer) ? (Integer) max : (int) (Character) max;
       }
       }
 
@@ -487,9 +489,9 @@ import java.util.Random;
       for (String value : values.split(",")) {
       list.add(Integer.parseInt(value.trim()));
       }
-      } else if (type.equalsIgnoreCase("c")) {
+      } else if (type.equalsIgnoreCase("c")) { // Entrada manual
       for (String value : values.split(",")) {
-      list.add(value.trim().charAt(0));
+      list.add((int) value.trim().charAt(0)); // Converte para código ASCII
       }
       }
       } else if (inputType.equalsIgnoreCase("r")) { // Entrada aleatória
